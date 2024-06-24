@@ -28,7 +28,8 @@ fi
 echo -e "\nDownloading the artifact_id=${artifact_id} for the '${repo_name}' repo: envname=${envname}\n"
 
 archive_name="${envname}.zip"
-curl -L -H "Authorization: token ${GHA_TOKEN}" "https://api.github.com/repos/nsls2-conda-envs/${repo_name}/actions/artifacts/${artifact_id}/zip" > ${archive_name}
+#curl -L -H "Authorization: token ${GHA_TOKEN}" "https://api.github.com/repos/nsls2-conda-envs/${repo_name}/actions/artifacts/${artifact_id}/zip" > ${archive_name}
+curl -L "https://api.github.com/repos/nsls2-conda-envs/${repo_name}/actions/artifacts/${artifact_id}/zip" > ${archive_name}
 unzip -v ${archive_name}  # contents info
 unzip ${archive_name}
 # mv -v Dockerfile Dockerfile-${envname}
