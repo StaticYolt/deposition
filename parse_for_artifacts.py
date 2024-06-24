@@ -23,7 +23,7 @@ def main():
         for element in data['artifacts']:
             if element['workflow_run'].get('id') == int(id) and element['name'][-3:] != 'yml':
                 os.system(f"echo \"link: {str(element['url'])}\"")
-                os.system(f"bash download-artifacts.sh {str(str(element['url']).split('/')[5])} {str(element['id'])} {str(element['name'])}")
+                os.system(f"GHA_TOKEN={os.environ['GHA_TOKEN']} bash download-artifacts.sh {str(str(element['url']).split('/')[5])} {str(element['id'])} {str(element['name'])}")
                 # print("url: " + str(element['url']))
                 # print("artifact_id: " + str(element['id']))
                 # print("repo_name: " + str(str(element['url']).split('/')[5]))
