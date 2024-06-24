@@ -36,9 +36,10 @@ jobs:
           python3 -m pip install requests
       - name: download artifacts v2
         env:
-          WORKFLOW_IDS: ("9615874852" "9615874852")
+          WORKFLOW_IDS: "9615874852" "9615874852"
         run: |
-          for element in "${WORKFLOW_IDS[@]}"; do
+          IFS=' ' read -r -a input_array <<< ""$WORKFLOW_IDS"
+          for element in "${input_array[@]}"; do
             echo "$element"
           done
 
