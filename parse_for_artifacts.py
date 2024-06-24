@@ -1,6 +1,6 @@
 import argparse
 import os
-
+import json
 def main():
     parser = argparse.ArgumentParser(description='Parses Json and passes arguments to download-artifacts-sh')
     parser.add_argument("-o", "--organization", default="nsls2-collection-tiled",
@@ -18,7 +18,10 @@ def main():
             /repos/nsls2-conda-envs/nsls2-collection-tiled/actions/artifacts >> {args.file_name}.json
     '''
     os.system(artifact_command)
-    os.system(f"cat {args.file_name}.json")
+    f = open(f"{args.file_name}.json")
+    data = json.load(f)
+    for element in data['artifacts']:
+        os.system(f"echo {str(element)}")
 
 if __name__ == "__main__":
     main()
