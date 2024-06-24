@@ -9,7 +9,6 @@ def main():
     parser.add_argument("-f", "--file_name", default="artifact_info",
                         help="jsonfile containg info about all artifacts created from some repository")
     args = parser.parse_args()
-    print(args.organization)
     action_ids = args.action_run.split(' ')
     artifact_command = f'''
     gh api \\
@@ -20,8 +19,10 @@ def main():
     os.system(artifact_command)
     f = open(f"{args.file_name}.json")
     data = json.load(f)
-    for element in data['artifacts']:
-        os.system(f"echo {str(element)}")
+    for id in action_ids:
+        for element in data['artifacts']:
+            if element['workflow_run'].get('id') == int(id) and element['name'][-3:] != 'yml':
+                print(element)
 
 if __name__ == "__main__":
     main()

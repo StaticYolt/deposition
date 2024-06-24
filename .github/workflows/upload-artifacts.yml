@@ -36,7 +36,7 @@ jobs:
           python3 -m pip install requests
       - name: download artifacts v2
         env:
-          WORKFLOW_IDS: "9615874852 9615874852"
+          WORKFLOW_IDS: "9615874852"
           GH_TOKEN: ${{github.token}}
         run: |
           python3 parse_for_artifacts.py -a "$WORKFLOW_IDS"
