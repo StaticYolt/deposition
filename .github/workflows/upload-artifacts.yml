@@ -36,9 +36,12 @@ jobs:
           python3 -m pip install requests
       - name: download artifacts v2
         env:
-          WORKFLOW_ID: ("9615874852" "9615874852")
+          WORKFLOW_IDS: ("9615874852" "9615874852")
         run: |
-          echo ${WORKFLOW_ID}
+          for element in "${WORKFLOW_IDS[@]}"; do
+            echo "$element"
+          done
+
 #      - name: download artifacts
 #        run: |
 #          set -vxeuo pipefail
