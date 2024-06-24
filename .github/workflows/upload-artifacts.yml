@@ -38,6 +38,7 @@ jobs:
         env:
           WORKFLOW_IDS: "9615874852"
           GH_TOKEN: ${{github.token}}
+          GHA_TOKEN: ${{github.token}}
         run: |
           python3 parse_for_artifacts.py -a "$WORKFLOW_IDS"
 #          IFS=' ' read -r -a input_array <<< "$WORKFLOW_IDS"
