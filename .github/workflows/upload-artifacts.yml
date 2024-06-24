@@ -38,10 +38,11 @@ jobs:
         env:
           WORKFLOW_IDS: "9615874852 9615874852"
         run: |
-          IFS=' ' read -r -a input_array <<< "$WORKFLOW_IDS"
-          for element in "${input_array[@]}"; do
-            echo "$element"
-          done
+          python3 parse_for_artifacts.py -a $WORKFLOW_IDS
+#          IFS=' ' read -r -a input_array <<< "$WORKFLOW_IDS"
+#          for element in "${input_array[@]}"; do
+#            echo "$element"
+#          done
 
 #      - name: download artifacts
 #        run: |
