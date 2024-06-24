@@ -36,7 +36,7 @@ jobs:
           python3 -m pip install requests
       - name: download artifacts v2
         env:
-          WORKFLOW_ID: ("9615874852")
+          WORKFLOW_ID: ("9615874852" "9615874852")
         run: |
           echo ${WORKFLOW_ID}
 #      - name: download artifacts
