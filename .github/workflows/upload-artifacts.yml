@@ -15,13 +15,13 @@ jobs:
       TZ: America/New_York
 
     steps:
-      - name: Set env vars
-        run: |
-          export ZENODO_TOKEN=${{ secrets.ZENODO_TOKEN }}
-          echo "ZENODO_TOKEN=${ZENODO_TOKEN}" >> $GITHUB_ENV
-
-          export GHA_TOKEN=${{ secrets.GHA_TOKEN }}
-          echo "GHA_TOKEN=${GHA_TOKEN}" >> $GITHUB_ENV
+#      - name: Set env vars
+#        run: |
+#          export ZENODO_TOKEN=${{ secrets.ZENODO_TOKEN }}
+#          echo "ZENODO_TOKEN=${ZENODO_TOKEN}" >> $GITHUB_ENV
+#
+#          export GHA_TOKEN=${{ secrets.GHA_TOKEN }}
+#          echo "GHA_TOKEN=${GHA_TOKEN}" >> $GITHUB_ENV
 
       - name: checkout the code
         uses: actions/checkout@v4
@@ -34,34 +34,37 @@ jobs:
       - name: pip-install dependencies
         run: |
           python3 -m pip install requests
-
-      - name: download artifacts
+      - name: download artifacts v2
+        env:
+          WORKFLOW_ID: ("9615874852")
         run: |
-          set -vxeuo pipefail
-
-          # #
-          # # Artifacts from https://github.com/nsls2-conda-envs/nsls2-collection/actions/runs/7603753363
-          # #
-
-          # # https://github.com/nsls2-conda-envs/nsls2-collection/actions/runs/7603753363/artifacts/1184244620
-          # bash ${GITHUB_WORKSPACE}/download-artifacts.sh nsls2-collection 1184244620 2024-1.0-py310
-
-          # # https://github.com/nsls2-conda-envs/nsls2-collection/actions/runs/7603753363/artifacts/1184244622
-          # bash ${GITHUB_WORKSPACE}/download-artifacts.sh nsls2-collection 1184244622 2024-1.0-py311
-
-          #
-          # Artifacts from https://github.com/nsls2-conda-envs/nsls2-collection-tiled/actions/runs/9615874852
-          #
-
-          # https://github.com/nsls2-conda-envs/nsls2-collection-tiled/actions/runs/9615874852/artifacts/1625317555
-          bash ${GITHUB_WORKSPACE}/download-artifacts.sh nsls2-collection-tiled 1625317555 2024-2.1-py310-tiled
-
-          # https://github.com/nsls2-conda-envs/nsls2-collection-tiled/actions/runs/9615874852/artifacts/1625326776
-          bash ${GITHUB_WORKSPACE}/download-artifacts.sh nsls2-collection-tiled 1625326776 2024-2.1-py311-tiled
-
-          # https://github.com/nsls2-conda-envs/nsls2-collection-tiled/actions/runs/9615874852/artifacts/1625315849
-          bash ${GITHUB_WORKSPACE}/download-artifacts.sh nsls2-collection-tiled 1625315849 2024-2.1-py312-tiled
-
-      - name: Upload artifacts to Zenodo
-        run: |
-          python3 upload-artifacts.py
+          echo ${WORKFLOW_ID}
+#      - name: download artifacts
+#        run: |
+#          set -vxeuo pipefail
+#
+#          # #
+#          # # Artifacts from https://github.com/nsls2-conda-envs/nsls2-collection/actions/runs/7603753363
+#          # #
+#
+#          # # https://github.com/nsls2-conda-envs/nsls2-collection/actions/runs/7603753363/artifacts/1184244620
+#          # bash ${GITHUB_WORKSPACE}/download-artifacts.sh nsls2-collection 1184244620 2024-1.0-py310
+#
+#          # # https://github.com/nsls2-conda-envs/nsls2-collection/actions/runs/7603753363/artifacts/1184244622
+#          # bash ${GITHUB_WORKSPACE}/download-artifacts.sh nsls2-collection 1184244622 2024-1.0-py311
+#
+#          #
+#          # Artifacts from https://github.com/nsls2-conda-envs/nsls2-collection-tiled/actions/runs/9615874852
+#          #
+#
+#          # https://github.com/nsls2-conda-envs/nsls2-collection-tiled/actions/runs/9615874852/artifacts/1625317555
+#          bash ${GITHUB_WORKSPACE}/download-artifacts.sh nsls2-collection-tiled 1625317555 2024-2.1-py310-tiled
+#
+#          # https://github.com/nsls2-conda-envs/nsls2-collection-tiled/actions/runs/9615874852/artifacts/1625326776
+#          bash ${GITHUB_WORKSPACE}/download-artifacts.sh nsls2-collection-tiled 1625326776 2024-2.1-py311-tiled
+#
+#          # https://github.com/nsls2-conda-envs/nsls2-collection-tiled/actions/runs/9615874852/artifacts/1625315849
+#          bash ${GITHUB_WORKSPACE}/download-artifacts.sh nsls2-collection-tiled 1625315849 2024-2.1-py312-tiled
+#      - name: Upload artifacts to Zenodo
+#        run: |
+#          python3 upload-artifacts.py
